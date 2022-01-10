@@ -4,7 +4,7 @@ const inputEl = document.querySelector("#input-el")
 const inputBtn = document.querySelector("#input-btn");
 const ulEl = document.querySelector("#ul-el");
 const clearBtn = document.querySelector("#clear-btn");
-const tabBtn = document.querySelector("#tab-btn");
+const exportBtn = document.querySelector("#export-btn");
 
 let localStorageData = JSON.parse(localStorage.getItem("myInputs"));
 

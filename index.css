@@ -15,6 +15,12 @@ h1
 {
   text-align: center;
   text-shadow: 2px 2px #FFFFFF;
+  text-decoration: underline;
+}
+
+h1:hover
+{
+  text-shadow: 2px 2px #CACFD2;
 }
 
 input
@@ -33,29 +39,20 @@ input
 button
 {
   width: 50%;
-  background-color: #00ab4c;
+  color: white;
+  background-color: #117864;
   padding: 2px 10px;
   margin: 4px;
-  border: 2px solid #277b4a;
+  border: 2px solid #0E6251;
   border-radius: 4px;
   font-weight: bold;
 }
 
 button:hover
 {
-  background-color: #47b264;
+  background-color: #138D75;
 }
 
-#clear-btn
-{
-  background-color: #8b251c;
-  border: 2px solid #4b140f;
-}
-
-#clear-btn:hover
-{
-  background-color: #b6134a;
-}
 
 ul
 {
@@ -70,6 +67,7 @@ li
   font-size: 15px;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.5);
+  text-shadow: 2px 2px #FFFFFF;
   border: 2px solid #ffc600;
   padding: 2px;
   border-radius: 4px;
@@ -78,7 +76,7 @@ li
 
 li:before
 {
-  content: "|";
+  content: "✦";
   padding-right: 2px;
 }
 
@@ -90,4 +88,26 @@ a
 .columns
 {
   display: flex;
+}
+
+#clear-btn
+{
+  background-color: #7B241C;
+  border: 2px solid #641E16;
+}
+
+#clear-btn:hover
+{
+  background-color: #922B21;
+}
+
+#export-btn
+{
+  background-color: #21618C;
+  border: 2px solid #1B4F72;
+}
+
+#export-btn:hover
+{
+  background-color: #2874A6;
 }
