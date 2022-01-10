@@ -4,17 +4,21 @@ body
   margin:0;
   padding: 10px;
   font-family: Arial, Helvetica, sans-serif;
-  max-width: 400px;
-  background-color: #9fb5b7;
+  min-width:300px;
+  max-width: 600px;
+  background-color: rgba(255, 198, 0, 0.5);
+  border-color: 5px solid red;
+
 }
 
 
 input
 {
-  color: gold;
-  background-color: #c5d2d3;
-  border: 1px solid;
-  border-radius: 2px;
+  width: 100%;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid #ffc600;
+  border-radius: 4px;
   box-shadow: 1px;
   padding: 10px;
   box-sizing: border-box;
@@ -24,33 +28,46 @@ input
 button
 {
   width: 50%;
-  background-color: lightgreen;
-  padding: 10px;
+  background-color: #00ab4c;
+  padding: 2px 10px;
   margin: 4px;
-  border: 2px solid white;
+  border: 2px solid #277b4a;
+  border-radius: 4px;
   font-weight: bold;
+}
+
+button:hover
+{
+  background-color: #47b264;
 }
 
 #clear-btn
 {
-  background-color: red;
+  background-color: #8b251c;
+  border: 2px solid #4b140f;
+}
+
+#clear-btn:hover
+{
+  background-color: #b6134a;
 }
 
 ul
 {
-  width: 50%;
-  margin-top: 20px;
+  width: 100%;
+  margin-top: 2px;
   list-style: none;
   padding-left: 0;
 }
 
 li
 {
-  font-size: 20px;
-  background-color: ##9fb5b7;
-  border: 1px solid #265a6e;
+  font-size: 15px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid #ffc600;
   padding: 2px;
-  border-radius: 1px;
+  border-radius: 4px;
   margin-top: 5px;
 }
 
