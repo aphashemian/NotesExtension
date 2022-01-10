@@ -76,14 +76,21 @@ clearBtn.addEventListener("dblclick", function() {
 
 })
 
-tabBtn.addEventListener("click", function(){
-  chrome.tabs.query({active:true, currentWindow: true}, function(tabs) {
-    myInputs.push(tabs[0].url)
-    localStorage.setItem("myInputs", JSON.stringify(myInputs));
-    render(myInputs);
-  });
+exportBtn.addEventListener("click", function() {
+  for (let i = 0; i < myInputs.length; i++)
+  {
 
-  console.log(tabs[0].url);
-  localStorage.setItem("myInputs", JSON.stringify(myInputs));
-  render(myInputs);
+  }
 })
+
+// tabBtn.addEventListener("click", function(){
+//   chrome.tabs.query({active:true, currentWindow: true}, function(tabs) {
+//     myInputs.push(tabs[0].url)
+//     localStorage.setItem("myInputs", JSON.stringify(myInputs));
+//     render(myInputs);
+//   });
+//
+//   console.log(tabs[0].url);
+//   localStorage.setItem("myInputs", JSON.stringify(myInputs));
+//   render(myInputs);
+// })
