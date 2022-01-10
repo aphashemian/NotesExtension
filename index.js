@@ -29,19 +29,32 @@ function render(inputs)
     // li.textContent = myInputs;
     // ulEl.append(li);
     //console.log(i);
+    // <li>
+    //     <a target='_blank' href='${inputs[i]}'>
+    //         ${inputs[i]}
+    //     </a>
+    // </li>
     listItems += `
-            <li>
-                <a target='_blank' href='${inputs[i]}'>
-                    ${inputs[i]}
-                </a>
-            </li>
+          <li>
+                  ${inputs[i]}
+          </li>
         `
     }
     ulEl.innerHTML = listItems
 }
 
+inputBtn.addEventListener("click", save);
+this.addEventListener("keypress", function(event)
+{
+  if (event.keyCode === 13)
+  {
+    save();
+  }
+})
 
-inputBtn.addEventListener("click", function() {
+
+function save()
+{
   if (inputEl.value.length > 0)
   {
     myInputs.push(inputEl.value);
@@ -52,7 +65,8 @@ inputBtn.addEventListener("click", function() {
 
     console.log(localStorage.getItem("myInputs"));
   }
-})
+}
+
 
 // Double click = clear local storage and input array then render.
 clearBtn.addEventListener("dblclick", function() {
@@ -64,9 +78,10 @@ clearBtn.addEventListener("dblclick", function() {
 
 tabBtn.addEventListener("click", function(){
   chrome.tabs.query({active:true, currentWindow: true}, function(tabs) {
-    let activeTab = tabs[0];
-    let activeTabId = activeTab.id;
-  })
+    myInputs.push(tabs[0].url)
+    localStorage.setItem("myInputs", JSON.stringify(myInputs));
+    render(myInputs);
+  });
 
   console.log(tabs[0].url);
   localStorage.setItem("myInputs", JSON.stringify(myInputs));
