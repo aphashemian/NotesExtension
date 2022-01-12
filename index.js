@@ -19,7 +19,7 @@ class doubleList
 
 
   // Insert item at a certain index.
-  function insert(item, index)
+  insert(item, index)
   {
     const newNode = new Node(item);
     // If there are no items.
@@ -38,7 +38,7 @@ class doubleList
     this.listLength++;
   }
 
-  function getLength()
+  getLength()
   {
     return this.listLength;
   }
