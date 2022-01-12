@@ -1,5 +1,55 @@
+class Node
+{
+  constructor(value)
+  {
+    this.value = value;
+    this.previousNode = null;
+    this.nextNode = null;
+  }
+}
 
-let myInputs =[];
+class doubleList
+{
+  constructor()
+  {
+    this.headNode = null;
+    this.tailNode = null;
+    this.listLength = 0;
+  }
+
+
+  // Insert item at a certain index.
+  function insert(item, index)
+  {
+    const newNode = new Node(item);
+    // If there are no items.
+    if (!(this.listLength))
+    {
+      this.headNode = newNode;
+      this.tailNode = newNode;
+    }
+
+    // If there are other items.
+    else if (this.listLength)
+    {
+
+    }
+
+    this.listLength++;
+  }
+
+  function getLength()
+  {
+    return this.listLength;
+  }
+
+
+
+}
+
+//  Variable declarations.
+
+const folderContainer = document.querySelector("#folders-el");
 const inputEl = document.querySelector("#input-el")
 const inputBtn = document.querySelector("#input-btn");
 const ulEl = document.querySelector("#ul-el");
@@ -8,12 +58,17 @@ const exportBtn = document.querySelector("#export-btn");
 
 let localStorageData = JSON.parse(localStorage.getItem("myInputs"));
 
+let notesList = new doubleList();
+let folderList = new doubleList();
+
 
 if (localStorageData)
 {
   myInputs = localStorageData;
   render(myInputs);
 }
+
+// Functions
 
 // Render the input array.
 function render(inputs)
@@ -52,6 +107,10 @@ this.addEventListener("keypress", function(event)
   }
 })
 
+function createFolder()
+{
+
+}
 
 function save()
 {
@@ -82,15 +141,3 @@ exportBtn.addEventListener("click", function() {
 
   }
 })
-
-// tabBtn.addEventListener("click", function(){
-//   chrome.tabs.query({active:true, currentWindow: true}, function(tabs) {
-//     myInputs.push(tabs[0].url)
-//     localStorage.setItem("myInputs", JSON.stringify(myInputs));
-//     render(myInputs);
-//   });
-//
-//   console.log(tabs[0].url);
-//   localStorage.setItem("myInputs", JSON.stringify(myInputs));
-//   render(myInputs);
-// })
