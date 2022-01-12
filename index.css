@@ -1,9 +1,9 @@
-
 body
 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ;
   background-color: rgba(255, 198, 0, 0.5);
   display: block;
+  font-family: "Comic Neue", sans-serif;
 
   margin: 0px;
   padding: 10px;
@@ -26,6 +26,7 @@ h1:hover
 
 input
 {
+  font-family: "Comic Neue", sans-serif;
   width: 100%;
   color: black;
   background-color: rgba(255, 255, 255, 0.5);
@@ -39,6 +40,7 @@ input
 
 button
 {
+  font-family: "Comic Neue", sans-serif;
   width: 100%;
   color: white;
   background-color: #117864;
@@ -77,13 +79,20 @@ li
   display: inline-block;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  hyphens: auto; 
+  hyphens: auto;
 }
 
 li:before
 {
   content: "✦";
   padding-right: 2px;
+}
+
+li:hover
+{
+  background-color: #922B21;
+  text-shadow: 0px 0px;
+  color: white; 
 }
 
 a
@@ -116,4 +125,9 @@ a
 #export-btn:hover
 {
   background-color: #2874A6;
+}
+
+#folders-el
+{
+
 }
