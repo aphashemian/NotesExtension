@@ -32,7 +32,13 @@ class doubleList
     // If there are other items.
     else if (this.listLength)
     {
-
+      // If index is last item.
+      if (index === getLength() - 1)
+      {
+        newNode.previousNode = this.tailNode;
+        this.tailNode.nextNode = newNode;
+        this.tailNode = newNode;
+      }
     }
 
     this.listLength++;
@@ -56,11 +62,12 @@ const ulEl = document.querySelector("#ul-el");
 const clearBtn = document.querySelector("#clear-btn");
 const exportBtn = document.querySelector("#export-btn");
 
+
 let localStorageData = JSON.parse(localStorage.getItem("myInputs"));
 
 let notesList = new doubleList();
 let folderList = new doubleList();
-
+let myInputs = [];
 
 if (localStorageData)
 {
