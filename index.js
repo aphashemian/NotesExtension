@@ -69,6 +69,30 @@ let notesList = new doubleList();
 let folderList = new doubleList();
 let myInputs = [];
 
+document.getElementById("searchInput").addEventListener("keyup", function() {
+  let searchQuery = event.target.value.toLowerCase();
+  console.log(searchQuery);
+  //let allItems = document.getElementsByClassName("item");
+  let newOut = [];
+  for (let i = 0; i < myInputs.length; i++)
+  {
+    let currentItem = myInputs[i].toLowerCase();
+    //console.log(currentItem);
+    if (currentItem.includes(searchQuery))
+    {
+      newOut.push(currentItem);
+      //allItems[i].style.display = "block";
+      //console.log(myInputs);
+    }
+
+    // else.... style.display = "none";
+  }
+
+  render(newOut);
+})
+
+// If items in local storage, render inputs.
+// Used for initially opening of application.
 if (localStorageData)
 {
   myInputs = localStorageData;
@@ -97,7 +121,7 @@ function render(inputs)
     //     </a>
     // </li>
     listItems += `
-          <li>
+          <li class="item">
                   ${inputs[i]}
           </li>
         `
@@ -106,6 +130,9 @@ function render(inputs)
 }
 
 inputBtn.addEventListener("click", save);
+
+
+// If enter pressed, save the message.
 this.addEventListener("keypress", function(event)
 {
   if (event.keyCode === 13)
@@ -114,18 +141,20 @@ this.addEventListener("keypress", function(event)
   }
 })
 
+// Create folder.
 function createFolder()
 {
 
 }
 
+// Save function called.
 function save()
 {
   if (inputEl.value.length > 0)
   {
     myInputs.push(inputEl.value);
     //console.log(myInputs);
-    inputEl.value = "";
+    inputEl.value = ""; // Clear input element.
     localStorage.setItem("myInputs", JSON.stringify(myInputs))
     render(myInputs);
 
@@ -135,6 +164,10 @@ function save()
 
 
 // Double click = clear local storage and input array then render.
+ulEl.addEventListener("click", function() {
+  console.log("America");
+})
+
 clearBtn.addEventListener("dblclick", function() {
   localStorage.clear();
   myInputs = [];
