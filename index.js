@@ -1,58 +1,3 @@
-class Node
-{
-  constructor(value)
-  {
-    this.value = value;
-    this.previousNode = null;
-    this.nextNode = null;
-  }
-}
-
-class doubleList
-{
-  constructor()
-  {
-    this.headNode = null;
-    this.tailNode = null;
-    this.listLength = 0;
-  }
-
-
-  // Insert item at a certain index.
-  insert(item, index)
-  {
-    const newNode = new Node(item);
-    // If there are no items.
-    if (!(this.listLength))
-    {
-      this.headNode = newNode;
-      this.tailNode = newNode;
-    }
-
-    // If there are other items.
-    else if (this.listLength)
-    {
-      // If index is last item.
-      if (index === getLength() - 1)
-      {
-        newNode.previousNode = this.tailNode;
-        this.tailNode.nextNode = newNode;
-        this.tailNode = newNode;
-      }
-    }
-
-    this.listLength++;
-  }
-
-  getLength()
-  {
-    return this.listLength;
-  }
-
-
-
-}
-
 //  Variable declarations.
 
 const folderContainer = document.querySelector("#folders-el");
@@ -64,9 +9,6 @@ const exportBtn = document.querySelector("#export-btn");
 
 
 let localStorageData = JSON.parse(localStorage.getItem("myInputs"));
-
-let notesList = new doubleList();
-let folderList = new doubleList();
 let myInputs = [];
 
 document.getElementById("searchInput").addEventListener("keyup", function() {
@@ -95,7 +37,8 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
 // Used for initially opening of application.
 if (localStorageData)
 {
-  myInputs = localStorageData;
+  myInputs = localStorageData; // Store localdata in
+
   render(myInputs);
 }
 
@@ -107,19 +50,6 @@ function render(inputs)
   let listItems="";
   for (let i = 0; i < inputs.length; i++)
   {
-    // create element.
-    // set text cntent.
-    // append to ul.
-    //ulEl.innerHtml += "<li>" + myInputs[i] + "</li>"
-    // const li = document.createElement("li");
-    // li.textContent = myInputs;
-    // ulEl.append(li);
-    //console.log(i);
-    // <li>
-    //     <a target='_blank' href='${inputs[i]}'>
-    //         ${inputs[i]}
-    //     </a>
-    // </li>
     listItems += `
           <li class="item">
                   ${inputs[i]}
@@ -130,7 +60,6 @@ function render(inputs)
 }
 
 inputBtn.addEventListener("click", save);
-
 
 // If enter pressed, save the message.
 this.addEventListener("keypress", function(event)
