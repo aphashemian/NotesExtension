@@ -92,6 +92,7 @@ li
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
+
 }
 
 li:before
@@ -161,5 +162,7 @@ a
 
 #dark-mode-toggle
 {
-  
+  margin: 0px;
+  position: fixed;
+  left: 40%;
 }

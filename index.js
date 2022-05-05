@@ -7,9 +7,10 @@ const ulEl = document.querySelector("#ul-el");
 const clearBtn = document.querySelector("#clear-btn");
 const exportBtn = document.querySelector("#export-btn");
 
-
 let localStorageData = JSON.parse(localStorage.getItem("myInputs"));
 let myInputs = [];
+
+let modState = false;
 
 document.getElementById("searchInput").addEventListener("keyup", function() {
   let searchQuery = event.target.value.toLowerCase();
@@ -51,7 +52,7 @@ function render(inputs)
   for (let i = 0; i < inputs.length; i++)
   {
     listItems += `
-          <li class="item">
+          <li class="item" draggable = "true" contenteditable = "false">
                   ${inputs[i]}
           </li>
         `
@@ -92,10 +93,21 @@ function save()
 }
 
 
-// Double click = clear local storage and input array then render.
-ulEl.addEventListener("click", function() {
-  console.log("America");
+
+ulEl.addEventListener("dblclick", function(event) {
+
+  var target = event.target;
+  var defContent = target.innerHTML;
+
+  target.contentEditable = true;
+  modState = true;
+  //console.log(target.innerHMTL);
+
 })
+
+
+// **** MAIN BUTTON PRESS****
+
 
 clearBtn.addEventListener("dblclick", function() {
   localStorage.clear();
