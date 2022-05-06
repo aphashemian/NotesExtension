@@ -13,6 +13,7 @@ const inputBtn = document.querySelector("#input-btn");
 const ulEl = document.querySelector("#ul-el");
 const clearBtn = document.querySelector("#clear-btn");
 const exportBtn = document.querySelector("#export-btn");
+const darkModeCheck = document.querySelector("#dark-mode-toggle");
 
 let localStorageData = JSON.parse(localStorage.getItem("myInputs"));
 let myInputs = [];
@@ -45,7 +46,6 @@ function render(inputs)
     ulEl.innerHTML = listItems
 }
 
-inputBtn.addEventListener("click", save);
 
 // If enter pressed, save the message.
 this.addEventListener("keypress", function(event)
@@ -122,11 +122,11 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
 })
 
 
+// Double clicking of a pre-existing note allows modification.
 ulEl.addEventListener("dblclick", function(event) {
 
   var target = event.target;
-  console.log(target);
-  var defContent = target.innerHTML;
+  //console.log(target);
   target.contentEditable = true;
   modState = true;
   //console.log(target.innerHMTL);
@@ -136,6 +136,7 @@ ulEl.addEventListener("dblclick", function(event) {
 
 // **** MAIN BUTTON PRESS****
 
+inputBtn.addEventListener("click", save);
 
 clearBtn.addEventListener("dblclick", function() {
   localStorage.clear();
