@@ -62,6 +62,9 @@ function createFolder()
 
 }
 
+inputBtn.addEventListener("click", save);
+
+
 // Save function called.
 function save()
 {
@@ -136,7 +139,6 @@ ulEl.addEventListener("dblclick", function(event) {
 
 // **** MAIN BUTTON PRESS****
 
-inputBtn.addEventListener("click", save);
 
 clearBtn.addEventListener("dblclick", function() {
   localStorage.clear();
