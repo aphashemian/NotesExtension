@@ -68,8 +68,17 @@ function save()
 
   if (modState) // if modifying a written note.
   {
-    ulEl.getElementByTagName("li");
+    var listItems = ulEl.getElementsByTagName("li");
+    for (let i = 0; i < listItems.length; i++)
+    {
+      if (listItems[i].contentEditable)
+      {
+        myInputs[i].text = listItems[i].innerHTML;
+        listItems[i].contentEditable = false;
+        break;
+      }
 
+    }
 
   }
 
@@ -79,11 +88,14 @@ function save()
     myInputs.push(newItem);
     //console.log(myInputs);
     inputEl.value = ""; // Clear input element.
-    localStorage.setItem("myInputs", JSON.stringify(myInputs))
-    render(myInputs);
+    //render(myInputs);
 
     console.log(localStorage.getItem("myInputs"));
   }
+
+  // Store into local storage.
+  localStorage.setItem("myInputs", JSON.stringify(myInputs))
+  render(myInputs);
 }
 
 
