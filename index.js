@@ -37,24 +37,27 @@ function render(inputs)
   let listItems="";
   for (let i = 0; i < inputs.length; i++)
   {
+
     listItems += `
           <li class="item" id = "${inputs[i].id}" draggable = "true" contenteditable = "false">
                   ${inputs[i].text}
           </li>
         `
-    }
-    ulEl.innerHTML = listItems
+
+  }
+  ulEl.innerHTML = listItems
 }
 
 
-// If enter pressed, save the message.
-this.addEventListener("keypress", function(event)
+// Removes items from array based on indexes array passed in.
+function removeItems(indexes)
 {
-  if (event.keyCode === 13)
+  for (let i = 0; i < indexes; i++)
   {
-    save();
+    myInputs.splice(index);
+    render(myInputs);
   }
-})
+}
 
 // Create folder.
 function createFolder()
@@ -62,45 +65,57 @@ function createFolder()
 
 }
 
-inputBtn.addEventListener("click", save);
 
 
 // Save function called.
 function save()
 {
 
-  if (modState) // if modifying a written note.
+  // If in the state of modifying a pre-existing note.
+  if (modState)
   {
+    console.log("save");
+    let indexRemove;
     var listItems = ulEl.getElementsByTagName("li");
     for (let i = 0; i < listItems.length; i++)
     {
       if (listItems[i].contentEditable)
       {
+        console.log(listItems[i].innerHMTL);
+
         myInputs[i].text = listItems[i].innerHTML;
+        //myInputs[i].contentEditable = false;
         listItems[i].contentEditable = false;
-        break;
+
+        modState = false;
+
+        continue;
       }
-
     }
-
   }
 
-  else if (inputEl.value.length > 0)
+  // else.
+  else
   {
-    var newItem = new Item(inputEl.value);
-    myInputs.push(newItem);
-    //console.log(myInputs);
-    inputEl.value = ""; // Clear input element.
-    //render(myInputs);
+    if (inputEl.value.length > 0)
+    {
+      var newItem = new Item(inputEl.value);
+      myInputs.push(newItem);
+      //console.log(myInputs);
+      inputEl.value = ""; // Clear input element.
+      //render(myInputs);
 
-    console.log(localStorage.getItem("myInputs"));
+      console.log(localStorage.getItem("myInputs"));
+    }
   }
-
   // Store into local storage.
   localStorage.setItem("myInputs", JSON.stringify(myInputs))
   render(myInputs);
 }
 
+
+
+inputBtn.addEventListener("click", save);
 
 document.getElementById("searchInput").addEventListener("keyup", function() {
   let searchQuery = event.target.value.toLowerCase();
@@ -109,7 +124,7 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
   let newOut = [];
   for (let i = 0; i < myInputs.length; i++)
   {
-    let currentItem = myInputs[i].toLowerCase();
+    let currentItem = myInputs[i].text.toLowerCase();
     //console.log(currentItem);
     if (currentItem.includes(searchQuery))
     {
@@ -124,20 +139,35 @@ document.getElementById("searchInput").addEventListener("keyup", function() {
   render(newOut);
 })
 
+this.addEventListener("keypress", function(event)
+{
 
-// Double clicking of a pre-existing note allows modification.
-ulEl.addEventListener("dblclick", function(event) {
+  switch (event.keyCode)
+  {
+  case 13:
+          save();
+          break;
+  case 8:
 
-  var target = event.target;
-  //console.log(target);
-  target.contentEditable = true;
-  modState = true;
-  //console.log(target.innerHMTL);
+          break;
+  }
+
 
 })
 
+function drag(ev)
+{
+  ev.dataTransfer.setData("text", ev.target);
+}
 
-// **** MAIN BUTTON PRESS****
+function drop(ev)
+{
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+
+// **** BUTTON PRESSES ****
 
 
 clearBtn.addEventListener("dblclick", function() {
@@ -152,4 +182,21 @@ exportBtn.addEventListener("click", function() {
   {
 
   }
+})
+
+// **** OTHER PRESS INTERACTIONS ****
+
+// Double clicking of a pre-existing note allows modification.
+ulEl.addEventListener("dblclick", function(event) {
+
+  var target = event.target;
+  console.log(target);
+  if (target.classList.contains("item"))
+  {
+    console.log("dwedew");
+    target.contentEditable = true;
+    modState = true;
+  }
+  //console.log(target.innerHMTL);
+
 })
