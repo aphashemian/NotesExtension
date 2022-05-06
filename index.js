@@ -1,5 +1,12 @@
 //  Variable declarations.
 
+function Item(value)
+{
+  var id = "id" + Math.random().toString(16).slice(2);
+
+  return {"id" : id, "text" : value}
+}
+
 const folderContainer = document.querySelector("#folders-el");
 const inputEl = document.querySelector("#input-el")
 const inputBtn = document.querySelector("#input-btn");
@@ -12,36 +19,14 @@ let myInputs = [];
 
 let modState = false;
 
-document.getElementById("searchInput").addEventListener("keyup", function() {
-  let searchQuery = event.target.value.toLowerCase();
-  console.log(searchQuery);
-  //let allItems = document.getElementsByClassName("item");
-  let newOut = [];
-  for (let i = 0; i < myInputs.length; i++)
-  {
-    let currentItem = myInputs[i].toLowerCase();
-    //console.log(currentItem);
-    if (currentItem.includes(searchQuery))
-    {
-      newOut.push(currentItem);
-      //allItems[i].style.display = "block";
-      //console.log(myInputs);
-    }
-
-    // else.... style.display = "none";
-  }
-
-  render(newOut);
-})
-
 // If items in local storage, render inputs.
 // Used for initially opening of application.
 if (localStorageData)
 {
   myInputs = localStorageData; // Store localdata in
-
   render(myInputs);
 }
+
 
 // Functions
 
@@ -52,8 +37,8 @@ function render(inputs)
   for (let i = 0; i < inputs.length; i++)
   {
     listItems += `
-          <li class="item" draggable = "true" contenteditable = "false">
-                  ${inputs[i]}
+          <li class="item" id = "${inputs[i].id}" draggable = "true" contenteditable = "false">
+                  ${inputs[i].text}
           </li>
         `
     }
@@ -80,9 +65,18 @@ function createFolder()
 // Save function called.
 function save()
 {
-  if (inputEl.value.length > 0)
+
+  if (modState) // if modifying a written note.
   {
-    myInputs.push(inputEl.value);
+    ulEl.getElementByTagName("li");
+
+
+  }
+
+  else if (inputEl.value.length > 0)
+  {
+    var newItem = new Item(inputEl.value);
+    myInputs.push(newItem);
     //console.log(myInputs);
     inputEl.value = ""; // Clear input element.
     localStorage.setItem("myInputs", JSON.stringify(myInputs))
@@ -93,12 +87,34 @@ function save()
 }
 
 
+document.getElementById("searchInput").addEventListener("keyup", function() {
+  let searchQuery = event.target.value.toLowerCase();
+  console.log(searchQuery);
+  //let allItems = document.getElementsByClassName("item");
+  let newOut = [];
+  for (let i = 0; i < myInputs.length; i++)
+  {
+    let currentItem = myInputs[i].toLowerCase();
+    //console.log(currentItem);
+    if (currentItem.includes(searchQuery))
+    {
+      newOut.push(currentItem);
+      //allItems[i].style.display = "block";
+      //console.log(myInputs);
+    }
+
+    // else.... style.display = "none";
+  }
+
+  render(newOut);
+})
+
 
 ulEl.addEventListener("dblclick", function(event) {
 
   var target = event.target;
+  console.log(target);
   var defContent = target.innerHTML;
-
   target.contentEditable = true;
   modState = true;
   //console.log(target.innerHMTL);
