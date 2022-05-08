@@ -19,13 +19,24 @@
 
       <input type="textbox" id="input-el" placeholder="New Note..."></input>
 
-      <div class="columns" style="background-color: rgba(255, 255, 255, 0.5); border: 2px solid #ffc600">
-        <button id="input-btn">SAVE</button>
-        <button id="clear-btn">CLEAR</button>
-        <button id="export-btn">EXPORT</button>
+      <div class = "container">
+        <div class="columns">
+          <button id="input-btn">SAVE</button>
+          <button id="clear-btn">CLEAR</button>
+          <button id="export-btn">EXPORT</button>
+        </div>
       </div>
 
-      <div>
+      <div class = "container">
+        <div id = "folder-header">
+          <button id = "new-folder-btn">+</button>
+          <span class = "pop-up hidden" id = "folderNamePopup">
+            <input type="text" id = "folderInput"></span>
+        </div>
+        <ul id = "folders-el"></ul>
+      </div>
+
+      <div class = "container">
         <ul id = "ul-el"></ul>
       </div>
 

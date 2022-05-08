@@ -4,7 +4,14 @@ function Item(value)
 {
   var id = "id" + Math.random().toString(16).slice(2);
 
-  return {"id" : id, "text" : value}
+  return {"id" : id, "text" : value, "displayed" : false}
+}
+
+function Folder(itemList)
+{
+  var id = "id" + Math.random().toString(16).slice(2);
+
+  return {"id" : id, "items" : itemList}
 }
 
 const folderContainer = document.querySelector("#folders-el");
@@ -14,6 +21,8 @@ const ulEl = document.querySelector("#ul-el");
 const clearBtn = document.querySelector("#clear-btn");
 const exportBtn = document.querySelector("#export-btn");
 const darkModeCheck = document.querySelector("#dark-mode-toggle");
+const newFolderBtn = document.querySelector("#new-folder-btn");
+
 
 let localStorageData = JSON.parse(localStorage.getItem("myInputs"));
 let myInputs = [];
@@ -30,6 +39,8 @@ if (localStorageData)
 
 
 // Functions
+
+
 
 // Render the input array.
 function render(inputs)
@@ -62,7 +73,9 @@ function removeItems(indexes)
 // Create folder.
 function createFolder()
 {
-
+  let popUp = document.querySelector("#folderNamePopup");
+  popUp.classList.toggle("hidden");
+  console.log("Folder");
 }
 
 
@@ -81,9 +94,9 @@ function save()
     {
       if (listItems[i].contentEditable)
       {
-        console.log(listItems[i].innerHMTL);
+        console.log("x" + listItems[i].textContent);
 
-        myInputs[i].text = listItems[i].innerHTML;
+        myInputs[i].text = listItems[i].textContent;
         //myInputs[i].contentEditable = false;
         listItems[i].contentEditable = false;
 
@@ -168,6 +181,8 @@ function drop(ev)
 }
 
 // **** BUTTON PRESSES ****
+
+newFolderBtn.addEventListener("click", createFolder);
 
 
 clearBtn.addEventListener("dblclick", function() {
