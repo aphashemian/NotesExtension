@@ -7,6 +7,7 @@ body
   padding: 5px;
 
   min-width: 200px;
+  max-width: 500px;
 
 }
 
@@ -58,20 +59,18 @@ input #input-el
 button
 {
   font-family: "Comic Neue", sans-serif;
-  width: 100%;
   color: white;
-  background-color: #117864;
-  padding: 2px 1px;
+  width: 75px;
 
-  border: 2px solid #0E6251;
+  border: 2px solid;
   border-radius: 4px;
   font-weight: bold;
+
+  padding: 2px 1px;
+  margin: 2px;
 }
 
-button:hover
-{
-  background-color: #138D75;
-}
+
 
 
 ul
@@ -135,11 +134,24 @@ a
   display: flex;
 }
 
+#input-btn,
+#new-folder-btn
+{
+  background-color: #117864;
+  border-color: #0E6251;
+}
+
+#input-btn:hover,
+#new-folder-btn:hover
+{
+  background-color: #138D75;
+}
+
 
 #clear-btn
 {
   background-color: #7B241C;
-  border: 2px solid #641E16;
+  border-color: #641E16;
 }
 
 #clear-btn:hover
@@ -150,12 +162,17 @@ a
 #export-btn
 {
   background-color: #21618C;
-  border: 2px solid #1B4F72;
+  border-color: #1B4F72;
 }
 
 #export-btn:hover
 {
   background-color: #2874A6;
+}
+
+#folder-header
+{
+  border-bottom: 1px solid #ffc600;
 }
 
 #folders-el
