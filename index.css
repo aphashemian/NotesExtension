@@ -3,21 +3,22 @@ body
   background-color: rgba(255, 198, 0, 0.5);
   display: block;
   font-family: "Comic Neue", sans-serif;
-  margin: 0 auto;
   padding: 5px;
 
-  min-width: 200px;
-  max-width: 500px;
+
 
 }
 
 .container
 {
 
+  min-width: 200px;
+  max-width: 400px;
   border: 2px solid #ffc600;
   border-radius: 4px;
   box-shadow: 1px;
-  margin: 4px 0px;
+  margin: 0 auto;
+  margin-bottom: 4px;
 
 }
 
@@ -211,7 +212,7 @@ a
   cursor: pointer;
   display: inline-block;
   width: 75%;
-  animation: fadeIn 1s;
+  animation: fadeIn 0.5s;
 }
 
 .hidden
@@ -223,7 +224,7 @@ a
 {
   height: 1em;
   margin: 0 auto;
-  width: 100%;
+  width: 105%;
 }
 
 

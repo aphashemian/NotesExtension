@@ -1,3 +1,5 @@
+
+
 //  Variable declarations.
 
 function Item(value)
@@ -23,11 +25,16 @@ const exportBtn = document.querySelector("#export-btn");
 const darkModeCheck = document.querySelector("#dark-mode-toggle");
 const newFolderBtn = document.querySelector("#new-folder-btn");
 
+const folderInput = document.querySelector("#folderInput");
 
 let localStorageData = JSON.parse(localStorage.getItem("myInputs"));
 let myInputs = [];
 
-let modState = false;
+// Enum -> TypeScript
+let currentState = 0;
+// 0 -> inputting new note (default)
+// 1 -> modifying old note.
+// 2 -> inputting new folder.
 
 // If items in local storage, render inputs.
 // Used for initially opening of application.
@@ -40,7 +47,15 @@ if (localStorageData)
 
 // Functions
 
+function renderFolders(inputs)
+{
 
+}
+
+function renderItems(inputs)
+{
+
+}
 
 // Render the input array.
 function render(inputs)
@@ -57,6 +72,9 @@ function render(inputs)
 
   }
   ulEl.innerHTML = listItems
+
+  // renderFolders();
+  // renderItems();
 }
 
 
@@ -71,11 +89,12 @@ function removeItems(indexes)
 }
 
 // Create folder.
-function createFolder()
+function createFolderInput()
 {
   let popUp = document.querySelector("#folderNamePopup");
   popUp.classList.toggle("hidden");
   console.log("Folder");
+  currentState = 2;
 }
 
 
@@ -84,43 +103,44 @@ function createFolder()
 function save()
 {
 
-  // If in the state of modifying a pre-existing note.
-  if (modState)
-  {
-    console.log("save");
-    let indexRemove;
-    var listItems = ulEl.getElementsByTagName("li");
-    for (let i = 0; i < listItems.length; i++)
-    {
-      if (listItems[i].contentEditable)
-      {
-        console.log("x" + listItems[i].textContent);
+  switch (currentState) {
+  case 0:
+        if (inputEl.value.length > 0)
+        {
+          var newItem = new Item(inputEl.value);
+          myInputs.push(newItem);
+          //console.log(myInputs);
+          inputEl.value = ""; // Clear input element.
+          //render(myInputs);
 
-        myInputs[i].text = listItems[i].textContent;
-        //myInputs[i].contentEditable = false;
-        listItems[i].contentEditable = false;
+          console.log(localStorage.getItem("myInputs"));
+        }
+        break;
+  case 1:
+        var listItems = ulEl.getElementsByTagName("li");
+        for (let i = 0; i < listItems.length; i++)
+        {
+          if (listItems[i].contentEditable)
+          {
+            console.log("x" + listItems[i].textContent);
 
-        modState = false;
+            myInputs[i].text = listItems[i].textContent;
+            //myInputs[i].contentEditable = false;
+            listItems[i].contentEditable = false;
 
-        continue;
-      }
-    }
+            currentState = 0;
+
+            continue;
+          }
+        }
+        break;
+
+  case 2:
+  case 3:
   }
+  // If in the state of modifying a pre-existing note.
 
   // else.
-  else
-  {
-    if (inputEl.value.length > 0)
-    {
-      var newItem = new Item(inputEl.value);
-      myInputs.push(newItem);
-      //console.log(myInputs);
-      inputEl.value = ""; // Clear input element.
-      //render(myInputs);
-
-      console.log(localStorage.getItem("myInputs"));
-    }
-  }
   // Store into local storage.
   localStorage.setItem("myInputs", JSON.stringify(myInputs))
   render(myInputs);
@@ -132,23 +152,19 @@ inputBtn.addEventListener("click", save);
 
 document.getElementById("searchInput").addEventListener("keyup", function() {
   let searchQuery = event.target.value.toLowerCase();
-  console.log(searchQuery);
   //let allItems = document.getElementsByClassName("item");
   let newOut = [];
   for (let i = 0; i < myInputs.length; i++)
   {
-    let currentItem = myInputs[i].text.toLowerCase();
-    //console.log(currentItem);
-    if (currentItem.includes(searchQuery))
+    let currentItem = myInputs[i];
+    if (currentItem.text.toLowerCase().includes(searchQuery))
     {
-      newOut.push(currentItem);
-      //allItems[i].style.display = "block";
-      //console.log(myInputs);
+      nwOut.push(currentItem);
     }
 
     // else.... style.display = "none";
   }
-
+  console.log(newOut);
   render(newOut);
 })
 
@@ -182,7 +198,7 @@ function drop(ev)
 
 // **** BUTTON PRESSES ****
 
-newFolderBtn.addEventListener("click", createFolder);
+newFolderBtn.addEventListener("click", createFolderInput);
 
 
 clearBtn.addEventListener("dblclick", function() {
@@ -210,7 +226,7 @@ ulEl.addEventListener("dblclick", function(event) {
   {
     console.log("dwedew");
     target.contentEditable = true;
-    modState = true;
+    currentState = 1;
   }
   //console.log(target.innerHMTL);
 
